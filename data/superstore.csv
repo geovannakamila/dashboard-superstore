@@ -1,0 +1,11 @@
+Order ID,Order Date,Region,Segment,Category,Sub-Category,Product Name,Sales,Profit,Quantity
+CA-1,2022-01-05,West,Consumer,Furniture,Chairs,Office Chair,250,40,2
+CA-2,2022-02-10,East,Corporate,Technology,Phones,iPhone Case,120,20,3
+CA-3,2022-03-15,South,Home Office,Office Supplies,Binders,Binder A4,80,10,4
+CA-4,2022-04-01,Central,Consumer,Furniture,Tables,Wood Table,400,60,1
+CA-5,2022-05-20,West,Corporate,Technology,Accessories,Wireless Mouse,90,15,2
+CA-6,2022-06-11,East,Consumer,Office Supplies,Paper,A4 Paper Pack,40,8,5
+CA-7,2022-07-22,South,Home Office,Technology,Laptops,Notebook Dell,1200,200,1
+CA-8,2022-08-09,Central,Corporate,Furniture,Bookcases,Bookcase,600,90,1
+CA-9,2022-09-30,West,Consumer,Office Supplies,Art,Color Pens,70,12,3
+CA-10,2022-10-14,East,Corporate,Technology,Phones,Headset,180,25,2
