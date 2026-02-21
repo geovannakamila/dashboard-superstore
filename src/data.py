@@ -4,14 +4,26 @@ def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path)
     df.columns = [c.strip() for c in df.columns]
 
-    df["Order Date"] = pd.to_datetime(df["Order Date"], errors="coerce")
+    # Aceita "Order Date" ou "OrderDate"
+    if "Order Date" in df.columns:
+        df["Order Date"] = pd.to_datetime(df["Order Date"], errors="coerce")
+    elif "OrderDate" in df.columns:
+        df["OrderDate"] = pd.to_datetime(df["OrderDate"], errors="coerce")
+        df = df.rename(columns={"OrderDate": "Order Date"})
+    else:
+        raise ValueError("CSV não tem coluna de data (Order Date / OrderDate)")
+
     df = df.dropna(subset=["Order Date"])
 
-    # numéricos
+    # numéricos (se existirem)
     for col in ["Sales", "Profit", "Discount"]:
-        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    df["Quantity"] = pd.to_numeric(df["Quantity"], errors="coerce").fillna(0).astype(int)
+    if "Quantity" in df.columns:
+        df["Quantity"] = pd.to_numeric(df["Quantity"], errors="coerce").fillna(0).astype(int)
+    else:
+        df["Quantity"] = 0
 
     # features
     df["Year"] = df["Order Date"].dt.year
