@@ -8,8 +8,7 @@ st.set_page_config(page_title="Dashboard | Superstore", layout="wide")
 
 @st.cache_data
 def get_df():
-    url = "https://raw.githubusercontent.com/plotly/datasets/master/superstore.csv"
-    return load_data(url)
+    return load_data("data/superstore.csv")
 
 df = get_df()
 
