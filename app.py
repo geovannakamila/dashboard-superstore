@@ -8,7 +8,8 @@ st.set_page_config(page_title="Dashboard | Superstore", layout="wide")
 
 @st.cache_data
 def get_df():
-    return load_data("data/superstore.csv")
+    url = "https://raw.githubusercontent.com/plotly/datasets/master/superstore.csv"
+    return load_data(url)
 
 df = get_df()
 
@@ -70,18 +71,21 @@ years = sorted(df["Year"].unique())
 regions = sorted(df["Region"].unique())
 segments = sorted(df["Segment"].unique())
 categories = sorted(df["Category"].unique())
+subcats = sorted(df["Sub-Category"].unique())
 
 year_sel = st.sidebar.multiselect(T["year"], years, default=years)
 region_sel = st.sidebar.multiselect(T["region"], regions, default=regions)
 segment_sel = st.sidebar.multiselect(T["segment"], segments, default=segments)
 category_sel = st.sidebar.multiselect(T["category"], categories, default=categories)
+subcat_sel = st.sidebar.multiselect(T["subcategory"], subcats, default=subcats)
 
 df_filtered = apply_filters(
     df,
     years=year_sel,
     regions=region_sel,
     segments=segment_sel,
-    categories=category_sel
+    categories=category_sel,
+    subcategories=subcat_sel
 )
 
 k = kpis(df_filtered)
@@ -107,8 +111,6 @@ with tab2:
 
 with tab3:
     st.dataframe(top_products(df_filtered, 10), use_container_width=True)
-
-    # (opcional) tabela de lucro por subcategoria
     st.dataframe(profit_by_subcategory(df_filtered), use_container_width=True)
 
 with tab4:
